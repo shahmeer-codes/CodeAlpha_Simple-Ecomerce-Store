@@ -1,31 +1,61 @@
 import { ShoppingCart } from "lucide-react";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-const NAvbar = () => {
+
+const Navbar = () => {
   const cartValue = useSelector((state) => state.store.itemadded.length);
 
   return (
-    <div className="flex bg-blue-950 text-white justify-between h-20 w-screen items-center text-2xl ">
-      <div className="font-bold ml-10">
-        <h1>MyShop</h1>
-      </div>
-      <div className="flex gap-10">
-        <Link to="/">Home</Link>
-        <Link to="/">Products</Link>
-      </div>
-      <div className="h-12 w-12 mr-10 flex justify-center items-center rounded-full bg-black relative">
-        <Link to="/cart">
-          <ShoppingCart size={28} />
-        </Link>
+    <nav className="sticky top-0 z-50 w-full bg-blue-950/90 backdrop-blur-md text-white shadow-lg">
+      <div className="max-w-7xl mx-auto flex items-center justify-between h-20 px-6">
 
-        {cartValue > 0 && (
-          <div className="absolute -top-1 -right-2 bg-red-500 text-white text-xs font-bold rounded-full px-2">
-            {cartValue}
-          </div>
-        )}
+        {/* Logo */}
+        <div className="text-2xl font-extrabold tracking-wide">
+          <span className="text-blue-300">My</span>Shop
+        </div>
+
+        {/* Links */}
+        <div className="hidden md:flex items-center gap-8 text-base font-medium">
+          <Link
+            to="/"
+            className="hover:text-blue-300 transition duration-200"
+          >
+            Home
+          </Link>
+
+          <Link
+            to="/About"
+            className="hover:text-blue-300 transition duration-200"
+          >
+            About
+          </Link>
+
+          <Link
+            to="/Contact"
+            className="hover:text-blue-300 transition duration-200"
+          >
+            Contact
+          </Link>
+        </div>
+
+        {/* Cart */}
+        <div className="relative flex items-center">
+          <Link
+            to="/cart"
+            className="relative p-3 rounded-full bg-white/10 hover:bg-white/20 transition"
+          >
+            <ShoppingCart size={24} />
+          </Link>
+
+          {cartValue > 0 && (
+            <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs font-bold px-2 py-0.5 rounded-full shadow-md animate-pulse">
+              {cartValue}
+            </span>
+          )}
+        </div>
       </div>
-    </div>
+    </nav>
   );
 };
 
-export default NAvbar;
+export default Navbar;
